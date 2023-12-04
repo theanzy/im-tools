@@ -40,7 +40,7 @@ def get_frames(dir: str) -> list[Image.Image]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Images to spritesheet.')
+    parser = argparse.ArgumentParser(description='merge images verically')
     parser.add_argument('path', type=str,
                         help='path to image')
     parser.add_argument('-o', '--output', type=str, required=True,
