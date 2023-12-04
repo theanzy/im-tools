@@ -1,4 +1,4 @@
-## Tools for manipulation images
+## Tools for image manipulation
 
 - merge images side by side
 - merge images vertically
