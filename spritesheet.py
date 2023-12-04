@@ -19,10 +19,8 @@ def merge_frames(frames: list[Image.Image]) -> Image.Image:
     tile_height = frames[0].height
     spritesheet_width = tile_width * len(frames)
     spritesheet_height = tile_height
-    print('ss', spritesheet_width)
     spritesheet = Image.new(
         "RGBA", (int(spritesheet_width), int(spritesheet_height)))
-    spritesheet.show()
     for i, frame in enumerate(frames):
         left = i * tile_width
         right = left + tile_width
@@ -52,10 +50,13 @@ def main():
     parser = argparse.ArgumentParser(description='Images to spritesheet.')
     parser.add_argument('path', type=str,
                         help='directory containing frames')
+    parser.add_argument('-o', '--output', type=str, required=True,
+                        help='directory containing frames')
     args = parser.parse_args()
+    output_path = args.output
     frames = get_frames(args.path)
     spritesheet = merge_frames(frames)
-    spritesheet.save('spritesheet.png', "PNG")
+    spritesheet.save(output_path, "PNG")
     for f in frames:
         f.close()
 
