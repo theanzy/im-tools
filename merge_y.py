@@ -42,7 +42,7 @@ def get_frames(dir: str) -> list[Image.Image]:
 def main():
     parser = argparse.ArgumentParser(description='merge images verically')
     parser.add_argument('path', type=str,
-                        help='path to image')
+                        help='directory containing images')
     parser.add_argument('-o', '--output', type=str, required=True,
                         help='output path')
     args = parser.parse_args()
