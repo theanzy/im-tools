@@ -48,7 +48,6 @@ def main():
         frames.append(mirrored)
 
     sprite = merge_frames_x(frames)
-    print(output_path)
     sprite.save(output_path, 'PNG')
 
 
