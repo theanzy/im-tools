@@ -7,7 +7,7 @@ def main():
     parser.add_argument('path', type=str,
                         help='path to image file')
     parser.add_argument('-o', '--output', type=str, required=True,
-                        help='directory containing frames')
+                        help='output path of image')
     parser.add_argument('-x', '--x', type=int,
                         default=0, help='start x position')
     parser.add_argument('-y', '--y', type=int,
