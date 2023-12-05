@@ -47,7 +47,6 @@ def main():
             i_frame = img.crop((i * iwidth, 0, i * iwidth + iwidth, iheight))
             i_frame = i_frame.rotate(degree, Image.NEAREST, expand=1)
             frames.append(i_frame)
-        frames[0].save('temp.png')
         sprite = merge_frames_x(frames)
         sprite.save(outpath, 'PNG')
     except FileNotFoundError as e:
