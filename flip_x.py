@@ -25,7 +25,8 @@ def merge_frames_x(frames: list[Image.Image]) -> Image.Image:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Images to spritesheet.')
+    parser = argparse.ArgumentParser(
+        description='flip spritesheet horizontally.')
     parser.add_argument('path', type=str,
                         help='path to image')
     parser.add_argument('-n', '--nframe', type=int, required=True,
