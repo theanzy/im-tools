@@ -1,5 +1,3 @@
-
-import os
 from PIL import Image, ImageOps
 import argparse
 
@@ -9,8 +7,7 @@ def merge_frames_x(frames: list[Image.Image]) -> Image.Image:
     tile_height = frames[0].height
     spritesheet_width = tile_width * len(frames)
     spritesheet_height = tile_height
-    spritesheet = Image.new(
-        'RGBA', (int(spritesheet_width), int(spritesheet_height)))
+    spritesheet = Image.new("RGBA", (int(spritesheet_width), int(spritesheet_height)))
     for i, frame in enumerate(frames):
         left = i * tile_width
         right = left + tile_width
@@ -24,20 +21,7 @@ def merge_frames_x(frames: list[Image.Image]) -> Image.Image:
     return spritesheet
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description='flip spritesheet horizontally.')
-    parser.add_argument('path', type=str,
-                        help='path to image')
-    parser.add_argument('-n', '--nframe', type=int, required=True,
-                        help='number of frames')
-    parser.add_argument('-o', '--output', type=str, required=True,
-                        help='output path')
-    args = parser.parse_args()
-
-    img = Image.open(args.path)
-    n_frames = args.nframe
-    output_path = args.output
+def flip_x(img: Image, n_frames: int):
     iwidth = img.width / n_frames
     iheight = img.height
 
@@ -48,8 +32,23 @@ def main():
         frames.append(mirrored)
 
     sprite = merge_frames_x(frames)
-    sprite.save(output_path, 'PNG')
+    return sprite
 
 
-if __name__ == '__main__':
+def main():
+    parser = argparse.ArgumentParser(description="flip spritesheet horizontally.")
+    parser.add_argument("path", type=str, help="path to image")
+    parser.add_argument(
+        "-n", "--nframe", type=int, required=True, help="number of frames"
+    )
+    parser.add_argument("-o", "--output", type=str, required=True, help="output path")
+    args = parser.parse_args()
+
+    img = Image.open(args.path)
+    n_frames = args.nframe
+    output_path = args.output
+    flip_x(img, n_frames).save(output_path, "PNG")
+
+
+if __name__ == "__main__":
     main()
