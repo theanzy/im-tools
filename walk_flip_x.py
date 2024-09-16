@@ -6,7 +6,7 @@ from PIL import Image
 
 
 def main():
-    parser = argparse.ArgumentParser(description="scale image by multiplier factor")
+    parser = argparse.ArgumentParser(description="walk folder and flip all images")
     parser.add_argument("path", type=str, help="path to image file")
     args = parser.parse_args()
     path = args.path
@@ -26,6 +26,7 @@ def main():
                 os.makedirs(outdir, exist_ok=True)
             outpath = os.path.normpath(os.path.join(os.path.join(outdir, f)))
             flip_x(Image.open(imgpath), strip_count).save(outpath)
+
 
 if __name__ == "__main__":
     main()

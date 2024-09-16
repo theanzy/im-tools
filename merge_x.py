@@ -1,7 +1,5 @@
 from PIL import Image
 import os
-import math
-import time
 import argparse
 
 
@@ -13,17 +11,18 @@ def save_image():
     return
 
 
-def merge_frames(frames: list[Image.Image]) -> Image.Image:
+def merge_frames_x(frames: list[Image.Image]) -> Image.Image:
 
-    tile_width = frames[0].width
-    tile_height = frames[0].height
+    tile_width = max([f.width for f in frames])
+    tile_height = max([f.height for f in frames])
     spritesheet_width = tile_width * len(frames)
     spritesheet_height = tile_height
     spritesheet = Image.new("RGBA", (int(spritesheet_width), int(spritesheet_height)))
-    for i, frame in enumerate(frames):
-        left = i * tile_width
+    for i, f in enumerate(frames):
+        left = int(i * tile_width + tile_width / 2 - f.width / 2)
         right = left + tile_width
         top = 0
+        top = int(tile_height / 2 - f.height / 2)
         bottom = top + tile_height
         box = (
             left,
@@ -31,7 +30,7 @@ def merge_frames(frames: list[Image.Image]) -> Image.Image:
             right,
             bottom,
         )
-        cut_frame = frame.crop((0, 0, tile_width, tile_height))
+        cut_frame = f.crop((0, 0, tile_width, tile_height))
         spritesheet.paste(cut_frame, box)
 
     return spritesheet
@@ -60,7 +59,7 @@ def main():
     output_path = args.output
     print(output_path, args.path)
     frames = get_frames(args.path)
-    spritesheet = merge_frames(frames)
+    spritesheet = merge_frames_x(frames)
     spritesheet.save(output_path, "PNG")
     for f in frames:
         f.close()

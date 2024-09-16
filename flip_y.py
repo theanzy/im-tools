@@ -2,25 +2,7 @@
 from PIL import Image, ImageOps
 import argparse
 
-
-def merge_frames_x(frames: list[Image.Image]) -> Image.Image:
-    tile_width = frames[0].width
-    tile_height = frames[0].height
-    spritesheet_width = tile_width * len(frames)
-    spritesheet_height = tile_height
-    spritesheet = Image.new(
-        'RGBA', (int(spritesheet_width), int(spritesheet_height)))
-    for i, frame in enumerate(frames):
-        left = i * tile_width
-        right = left + tile_width
-        top = 0
-        bottom = top + tile_height
-        box = (left, top, right, bottom)
-        cut_frame = frame.crop((0, 0, tile_width, tile_height))
-
-        spritesheet.paste(cut_frame, box)
-
-    return spritesheet
+from merge_x import merge_frames_x
 
 
 def main():
