@@ -23,6 +23,7 @@ def deskew_img(img: Any, path: str):
     grayscale = rgb2gray(img)
     angle = determine_skew(grayscale)
     rotated = rotate(img, angle, resize=True) * 255
+    print("saving to ", path)
     io.imsave(path, rotated.astype(np.uint8))
 
 
