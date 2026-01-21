@@ -1,9 +1,9 @@
-from PIL import Image
-import os
 import argparse
+import os
 
+from PIL import Image
 
-max_sprites_row = 3.0
+max_sprites_roe = 3.0
 frames = []
 
 
@@ -12,7 +12,6 @@ def save_image():
 
 
 def merge_frames_x(frames: list[Image.Image]) -> Image.Image:
-
     tile_width = max([f.width for f in frames])
     tile_height = max([f.height for f in frames])
     spritesheet_width = tile_width * len(frames)
