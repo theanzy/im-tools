@@ -1,7 +1,8 @@
-from typing import Callable
-from PIL import Image
 import argparse
 import os
+from typing import Callable
+
+from PIL import Image
 
 
 def each_image(dir: str, transform_fn: Callable[[Image, str], None]):
